@@ -5,7 +5,41 @@ import java.util.Arrays;
 public class LeetCode {
 
 	public static void main(String[] args) {
+		LeetCode leetCode = new LeetCode();
+		int[] array = new int[] { 1, 2 };
 		System.out.println("hello world!");
+		leetCode.rotate(array, 1);
+		for (int i = 0; i < array.length; i++)
+			System.out.println(array[i] + " ");
+	}
+
+	/**
+	 * Rotate an array of n elements to the right by k steps.
+	 * For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,7,1,2,3,4].
+	 * @param nums
+	 * @param k
+	 */
+	public void rotate(int[] nums, int k) {
+		if (nums.length == 1) {
+			return;
+		}
+		int n = k % (nums.length - 1);
+		if (n == 0) {
+			return;
+		}
+		revert(nums, 0, n);
+		revert(nums, n + 1, nums.length - 1);
+		revert(nums, 0, nums.length - 1);
+	}
+
+	private void revert(int[] nums, int start, int end) {
+		if (start == end)
+			return;
+		for (int i = 0; i <= (end - start) / 2; i++) {
+			int temp = nums[start + i];
+			nums[start + i] = nums[end - i];
+			nums[end - i] = temp;
+		}
 	}
 
 	/**
@@ -53,7 +87,7 @@ public class LeetCode {
 	public int removeDuplicates(int[] A) {
 		int header = 0;
 		int tail = 0;
-		for (int i = 0; i < A.length; i++) { //设置两个指针
+		for (int i = 0; i < A.length; i++) { // 设置两个指针
 			if (A[header] != A[tail]) {
 				header++;
 				A[header] = A[tail];

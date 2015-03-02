@@ -1,6 +1,7 @@
 package cn.tsplaycool;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class LeetCode {
 
@@ -11,6 +12,46 @@ public class LeetCode {
 		leetCode.rotate(array, 1);
 		for (int i = 0; i < array.length; i++)
 			System.out.println(array[i] + " ");
+
+		System.out.println(leetCode.isValid("[]{}"));
+	}
+
+	/**
+	 * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+	 * The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+	 * @param s
+	 * @return
+	 */
+	public boolean isValid(String s) {// 利用栈来做
+		Stack<Character> stack = new Stack<Character>();
+		for (int i = 0; i < s.length(); i++) {
+			char a = s.charAt(i);
+			Character character = new Character(a);
+			if (!stack.isEmpty()
+					&& isSame(stack.peek().charValue(), character.charValue())) {
+				stack.pop();
+			} else {
+				stack.push(new Character(a));
+			}
+		}
+		if (stack.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	private boolean isSame(char a, char b) {
+		if (a == '[' && b == ']') {
+			return true;
+		} else if (a == '{' && b == '}') {
+			return true;
+		} else if (a == '(' && b == ')') {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

@@ -17,6 +17,23 @@ public class LeetCode {
 	}
 
 	/**
+	 * Given a column title as appear in an Excel sheet, return its corresponding column number.
+	 * For example:
+	 * A -> 1
+	 * B -> 2
+	 * C -> 3
+	 * ...
+	 * Z -> 26
+	 * AA -> 27
+	 * AB -> 28 
+	 * @param s
+	 * @return
+	 */
+	public int titleToNumber(String s) {
+
+	}
+
+	/**
 	 * Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 	 * For example:
 	 * 1 -> A
@@ -32,7 +49,7 @@ public class LeetCode {
 	 * @param n
 	 * @return
 	 */
-	public String convertToTitle(int n) {
+	public String convertToTitle(int n) {// 这个题目相当于把十进制转成26进制
 		String result = "";
 		while (n > 0) {
 			int x = n % 26;

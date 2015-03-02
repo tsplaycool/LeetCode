@@ -17,6 +17,34 @@ public class LeetCode {
 	}
 
 	/**
+	 * Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+	 * For example:
+	 * 1 -> A
+	 * 2 -> B
+	 * 3 -> C
+	 * ...
+	 * 26 -> Z
+	 * 27 -> AA
+	 * 28 -> AB 
+	 * ...
+	 * 54 -> AZ
+	 * 55 -> BA
+	 * @param n
+	 * @return
+	 */
+	public String convertToTitle(int n) {
+		String result = "";
+		while (n > 0) {
+			int x = n % 26;
+			if (x == 0)
+				x = 26;
+			result = (char) (x + 'A' - 1) + result;
+			n = (n - 1) / 26;
+		}
+		return result;
+	}
+
+	/**
 	 * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 	 * The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 	 * @param s

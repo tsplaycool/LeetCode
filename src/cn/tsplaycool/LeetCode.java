@@ -53,7 +53,7 @@ public class LeetCode {
 	public int removeDuplicates(int[] A) {
 		int header = 0;
 		int tail = 0;
-		for (int i = 0; i < A.length; i++) { // Á½¸öÖ¸Õë±éÀú
+		for (int i = 0; i < A.length; i++) { //è®¾ç½®ä¸¤ä¸ªæŒ‡é’ˆ
 			if (A[header] != A[tail]) {
 				header++;
 				A[header] = A[tail];

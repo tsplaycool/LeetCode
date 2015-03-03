@@ -44,6 +44,63 @@ public class LeetCode {
 		int[] num = { 6, 5, 5 };
 		System.out.println(leetCode.majorityElement(num));
 		System.out.println(leetCode.lengthOfLastWord("a "));
+		System.out.println(leetCode.compareVersion("1.0", "1"));
+	}
+
+	/**
+	 * Compare two version numbers version1 and version2.
+	 * If version1 > version2 return 1, if version1 < version2 return -1, otherwise return 0.
+
+	 * You may assume that the version strings are non-empty and contain only digits and the . character.
+	 * The . character does not represent a decimal point and is used to separate number sequences.
+	 * For instance, 2.5 is not "two and a half" or "half way to version three", it is the fifth second-level revision of the second first-level revision.
+
+	 * Here is an example of version numbers ordering:
+
+	 * 0.1 < 1.1 < 1.2 < 13.37
+	 * @param version1
+	 * @param version2
+	 * @return
+	 */
+	public int compareVersion(String version1, String version2) {
+		String[] version_1, version_2;
+		if (!version1.contains(".")) {
+			version_1 = new String[1];
+			version_1[0] = version1;
+		} else {
+			version_1 = version1.split("\\.");// . 在正则表达式中指任何字符,所以加上转义字符
+		}
+		if (!version2.contains(".")) {
+			version_2 = new String[1];
+			version_2[0] = version2;
+		} else {
+			version_2 = version2.split("\\.");
+		}
+		for (int i = 0; i < version_1.length || i < version_2.length; i++) {
+			int v1 = 0, v2 = 0;
+			if (i >= version_1.length) {
+				v2 = Integer.parseInt(version_2[i]);
+				if (v2 != 0) {
+					return -1;
+				}
+			} else if (i >= version_2.length) {
+				v1 = Integer.parseInt(version_1[i]);
+				if (v1 != 0) {
+					return 1;
+				}
+			} else {
+				v1 = Integer.parseInt(version_1[i]);
+				v2 = Integer.parseInt(version_2[i]);
+			}
+			if (v1 > v2) {
+				return 1;
+			} else if (v1 == v2) {
+				continue;
+			} else {
+				return -1;
+			}
+		}
+		return 0;
 	}
 
 	/**
@@ -58,7 +115,7 @@ public class LeetCode {
 	 */
 	public int lengthOfLastWord(String s) {
 		int blankLocation = s.trim().lastIndexOf(" ");
-		String part = s.trim().substring(blankLocation+1);
+		String part = s.trim().substring(blankLocation + 1);
 		return part.length();
 	}
 

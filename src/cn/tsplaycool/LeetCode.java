@@ -1,6 +1,7 @@
 package cn.tsplaycool;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Stack;
 
 import cn.tsplaycool.help.TreeNode;
@@ -40,6 +41,31 @@ public class LeetCode {
 
 		System.out.println(leetCode.hasPathSum(nodes[0], 2));
 
+		int[] num = { 6, 5, 5 };
+		System.out.println(leetCode.majorityElement(num));
+	}
+
+	/**
+	 * Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+	 * You may assume that the array is non-empty and the majority element always exist in the array.
+	 * @param num
+	 * @return
+	 */
+	public int majorityElement(int[] num) {
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (int i = 0; i < num.length; i++) {
+			int numValue = num[i];
+			Integer numInteger = new Integer(numValue);
+			if (map.containsKey(numValue)) {
+				map.put(numInteger, map.get(numInteger).intValue() + 1);
+			} else {
+				map.put(numInteger, 1);
+			}
+			if (map.get(numInteger).intValue() > num.length / 2) {
+				return numValue;
+			}
+		}
+		return -1;
 	}
 
 	/**

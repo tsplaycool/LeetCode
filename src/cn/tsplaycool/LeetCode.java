@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
+import cn.tsplaycool.help.ListNode;
 import cn.tsplaycool.help.TreeNode;
 
 public class LeetCode {
@@ -46,6 +47,56 @@ public class LeetCode {
 		System.out.println(leetCode.lengthOfLastWord("a "));
 		System.out.println(leetCode.compareVersion("1.0", "1"));
 	}
+
+	/**
+	 * Write a program to find the node at which the intersection of two singly linked lists begins.
+	 * For example, the following two linked lists:
+	 * 
+	 *	A:          a1 → a2
+	               			↘
+	                 			c1 → c2 → c3
+	               			↗            
+	 *	B:    	b1 → b2 → b3
+	 *
+	 * begin to intersect at node c1.
+	 * @param headA
+	 * @param headB
+	 * @return
+	 */
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) { 
+        if(headA == null ||headB == null)return null;  
+        ListNode h1 = headA;  
+        ListNode h2 = headB;  
+        int count1 = 1, count2 = 1;  
+        while(h1.next != null){  
+            count1++;  
+            h1 = h1.next;  
+        }  
+        while(h2.next != null){  
+            count2++;  
+            h2 = h2.next;  
+        }  
+        if(h1 != h2) return null;  
+        else{  
+            int count = Math.abs(count1 - count2);  
+            if(count2 > count1){  
+                h1 = headB;  
+                h2 = headA;   
+            }  
+            else{  
+                h1 = headA;  
+                h2 = headB;  
+            }  
+            while((count--) > 0){  
+                h1 = h1.next;  
+            }  
+            while(h1 != null&&h2 != null && h1 != h2){  
+                h1 = h1.next;  
+                h2 = h2.next;  
+            }  
+            return h1;  
+        }  
+    }  
 
 	/**
 	 * Compare two version numbers version1 and version2.

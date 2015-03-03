@@ -43,6 +43,23 @@ public class LeetCode {
 
 		int[] num = { 6, 5, 5 };
 		System.out.println(leetCode.majorityElement(num));
+		System.out.println(leetCode.lengthOfLastWord("a "));
+	}
+
+	/**
+	 * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+	 * If the last word does not exist, return 0.
+	 * Note: A word is defined as a character sequence consists of non-space characters only.
+	 * For example, 
+	 * Given s = "Hello World",
+	 * return 5.
+	 * @param s
+	 * @return
+	 */
+	public int lengthOfLastWord(String s) {
+		int blankLocation = s.trim().lastIndexOf(" ");
+		String part = s.trim().substring(blankLocation+1);
+		return part.length();
 	}
 
 	/**

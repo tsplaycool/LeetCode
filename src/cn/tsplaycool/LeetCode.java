@@ -33,7 +33,7 @@ public class LeetCode {
 		char[] a = s.toCharArray();
 		int sum = 0;
 		for (int i = 0; i < a.length; i++) {
-			sum += Math.pow(26, i) * (a[a.length - 1 - i] - 'A' - 1);
+			sum += Math.pow(26, i) * (a[a.length - 1 - i] - 'A' + 1);
 		}
 		return sum;
 

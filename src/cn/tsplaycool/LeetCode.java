@@ -29,7 +29,13 @@ public class LeetCode {
 	 * @param s
 	 * @return
 	 */
-	public int titleToNumber(String s) {
+	public int titleToNumber(String s) {// 这个题目相当于把十进制转成26进制
+		char[] a = s.toCharArray();
+		int sum = 0;
+		for (int i = 0; i < a.length; i++) {
+			sum += Math.pow(26, i) * (a[a.length - 1 - i] - 'A' - 1);
+		}
+		return sum;
 
 	}
 

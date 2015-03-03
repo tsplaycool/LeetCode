@@ -3,6 +3,8 @@ package cn.tsplaycool;
 import java.util.Arrays;
 import java.util.Stack;
 
+import cn.tsplaycool.help.TreeNode;
+
 public class LeetCode {
 
 	public static void main(String[] args) {
@@ -14,6 +16,68 @@ public class LeetCode {
 			System.out.println(array[i] + " ");
 
 		System.out.println(leetCode.isValid("[]{}"));
+
+		TreeNode[] nodes = new TreeNode[7];
+		nodes[0] = new TreeNode(1);
+		nodes[1] = new TreeNode(-2);
+		nodes[2] = new TreeNode(-3);
+		nodes[3] = new TreeNode(1);
+		nodes[4] = new TreeNode(3);
+
+		nodes[5] = new TreeNode(-2);
+
+		nodes[6] = new TreeNode(-1);
+		nodes[0].left = nodes[1];
+		nodes[0].right = nodes[2];
+
+		nodes[1].left = nodes[3];
+		nodes[1].right = nodes[4];
+
+		nodes[2].left = nodes[2];
+		nodes[2].right = nodes[3];
+
+		nodes[3].left = nodes[6];
+
+		System.out.println(leetCode.hasPathSum(nodes[0], 2));
+
+	}
+
+	/**
+	 * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+	 * For example:
+	 * Given the below binary tree and sum = 22,
+	          5
+	         / \
+	        4   8
+	       /   / \
+	      11  13  4
+	     /  \      \
+	    7    2      1
+	 * @param root
+	 * @param sum
+	 * @return
+	 */
+	public boolean hasPathSum(TreeNode root, int sum) { // 利用递归
+		if (root == null) {
+			return false;
+		}
+		int path = root.val;
+		TreeNode leftNode = root.left;
+		TreeNode rightNode = root.right;
+		if (leftNode == null && rightNode == null && path == sum) {
+			return true;
+		}
+		if (leftNode != null) {
+			if (hasPathSum(leftNode, sum - path)) {
+				return true;
+			}
+		}
+		if (rightNode != null) {
+			if (hasPathSum(rightNode, sum - path)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

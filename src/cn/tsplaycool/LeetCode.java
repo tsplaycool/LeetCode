@@ -46,6 +46,52 @@ public class LeetCode {
 		System.out.println(leetCode.majorityElement(num));
 		System.out.println(leetCode.lengthOfLastWord("a "));
 		System.out.println(leetCode.compareVersion("1.0", "1"));
+		System.out.println(leetCode.convert("PAYPALISHIRING", 3));
+	}
+
+	/**
+	 * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+	 	P   A   H   N
+		A P L S I I G
+		Y   I   R
+	 * And then read line by line: "PAHNAPLSIIGYIR"
+	 * Write the code that will take a string and make this conversion given a number of rows:
+
+	 * string convert(string text, int nRows);
+	 * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+	 * @param s
+	 * @param nRows
+	 * @return
+	 */
+	public String convert(String s, int nRows) {
+		if (nRows <= 1)
+			return s;
+		int period = (nRows << 1) - 2;
+		char[] array = s.toCharArray();
+
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < nRows; i++) {
+			int j = i;
+			int index = 0, temp = 0;
+
+			while (j < array.length) {
+
+				result = result.append(array[j]);
+
+				if (i != 0 && i != nRows - 1) {
+
+					temp = (j % period);
+					index = ((temp < nRows) ? (nRows - 1 - temp) << 1
+							: (period - temp) << 1);
+					j += index;
+				} else {
+					j += period;
+				}
+			}
+		}
+
+		return result.toString();
 	}
 
 	/**
@@ -63,40 +109,41 @@ public class LeetCode {
 	 * @param headB
 	 * @return
 	 */
-	public ListNode getIntersectionNode(ListNode headA, ListNode headB) { 
-        if(headA == null ||headB == null)return null;  
-        ListNode h1 = headA;  
-        ListNode h2 = headB;  
-        int count1 = 1, count2 = 1;  
-        while(h1.next != null){  
-            count1++;  
-            h1 = h1.next;  
-        }  
-        while(h2.next != null){  
-            count2++;  
-            h2 = h2.next;  
-        }  
-        if(h1 != h2) return null;  
-        else{  
-            int count = Math.abs(count1 - count2);  
-            if(count2 > count1){  
-                h1 = headB;  
-                h2 = headA;   
-            }  
-            else{  
-                h1 = headA;  
-                h2 = headB;  
-            }  
-            while((count--) > 0){  
-                h1 = h1.next;  
-            }  
-            while(h1 != null&&h2 != null && h1 != h2){  
-                h1 = h1.next;  
-                h2 = h2.next;  
-            }  
-            return h1;  
-        }  
-    }  
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		if (headA == null || headB == null)
+			return null;
+		ListNode h1 = headA;
+		ListNode h2 = headB;
+		int count1 = 1, count2 = 1;
+		while (h1.next != null) {
+			count1++;
+			h1 = h1.next;
+		}
+		while (h2.next != null) {
+			count2++;
+			h2 = h2.next;
+		}
+		if (h1 != h2)
+			return null;
+		else {
+			int count = Math.abs(count1 - count2);
+			if (count2 > count1) {
+				h1 = headB;
+				h2 = headA;
+			} else {
+				h1 = headA;
+				h2 = headB;
+			}
+			while ((count--) > 0) {
+				h1 = h1.next;
+			}
+			while (h1 != null && h2 != null && h1 != h2) {
+				h1 = h1.next;
+				h2 = h2.next;
+			}
+			return h1;
+		}
+	}
 
 	/**
 	 * Compare two version numbers version1 and version2.

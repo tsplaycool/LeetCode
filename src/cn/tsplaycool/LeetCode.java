@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Stack;
 
 import cn.tsplaycool.help.ListNode;
+import cn.tsplaycool.help.MinStack;
 import cn.tsplaycool.help.TreeNode;
 
 public class LeetCode {
@@ -47,6 +48,9 @@ public class LeetCode {
 		System.out.println(leetCode.lengthOfLastWord("a "));
 		System.out.println(leetCode.compareVersion("1.0", "1"));
 		System.out.println(leetCode.convert("PAYPALISHIRING", 3));
+		MinStack minStack = new MinStack();
+		minStack.push(-3);
+		System.out.println(minStack.getMin());
 	}
 
 	/**

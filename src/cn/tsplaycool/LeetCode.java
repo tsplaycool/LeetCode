@@ -1,5 +1,6 @@
 package cn.tsplaycool;
 
+import java.security.KeyStore.Builder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
@@ -51,6 +52,52 @@ public class LeetCode {
 		MinStack minStack = new MinStack();
 		minStack.push(-3);
 		System.out.println(minStack.getMin());
+		System.out.println(leetCode.reverse(-123));
+	}
+
+	/**
+	 * Reverse digits of an integer.
+
+	 * Example1: x = 123, return 321
+	 * Example2: x = -123, return -321
+	 * @param x
+	 * @return
+	 */
+	public int reverse(int x) {
+		boolean isNegative;
+		if (x == Math.abs(x)) {
+			isNegative = false;
+		} else {
+			isNegative = true;
+		}
+		x = Math.abs(x);
+		int j = 1;
+		int temp = x;
+		while (temp / 10 != 0) {
+			j++;
+			temp = temp / 10;
+		}
+		byte[] n = new byte[j];
+		int i = 0;
+		do {
+			n[i] = (byte) (x % 10);
+			i++;
+			x = x / 10;
+		} while (x != 0);
+		int result;
+		StringBuilder builder = new StringBuilder();
+		for (int k = 0; k < n.length; k++) {
+			builder.append(n[k]);
+		}
+		try {
+			result = Integer.parseInt(builder.toString());
+			if (isNegative) {
+				result = -result;
+			}
+		} catch (NumberFormatException e) {
+			result = 0;
+		}
+		return result;
 	}
 
 	/**

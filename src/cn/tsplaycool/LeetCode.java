@@ -1,6 +1,5 @@
 package cn.tsplaycool;
 
-import java.security.KeyStore.Builder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
@@ -53,6 +52,60 @@ public class LeetCode {
 		minStack.push(-3);
 		System.out.println(minStack.getMin());
 		System.out.println(leetCode.reverse(-123));
+		System.out.println(leetCode.atoi("   +0 123"));
+	}
+
+	/**
+	 * Implement atoi to convert a string to an integer.
+	 * Hint: Carefully consider all possible input cases. If you want a challenge, please do not see below and ask yourself what are the possible input cases.
+	 * Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
+	 * @param str
+	 * @return
+	 */
+	public int atoi(String str) {// 选择尽可能多的连续的数字串进行转换
+		str = str.trim();
+		int isNegative = 1;
+		boolean isAlreadyJudgeNegative = false;
+		boolean isAlreadyCalc = false;
+		StringBuilder resultSb = new StringBuilder();
+		for (int i = 0; i < str.length(); i++) {
+			char temp = str.charAt(i);
+			if (temp == '-' && !isAlreadyJudgeNegative) {
+				isAlreadyJudgeNegative = true;
+				isAlreadyCalc = true;
+				isNegative = -1;
+				continue;
+			}
+			if (temp == '+' && !isAlreadyJudgeNegative) {
+				isAlreadyJudgeNegative = true;
+				isAlreadyCalc = true;
+				continue;
+			}
+			if (temp > '9' || temp < '0') {
+				break;
+			}
+
+			if (temp <= '9' && temp >= '0') {
+				if (!isAlreadyCalc) {
+					isAlreadyCalc = true;
+				}
+				isAlreadyJudgeNegative = true;
+				resultSb.append(temp);
+			}
+		}
+		int result = 0;
+		try {
+			if (resultSb.length() != 0) {
+				result = isNegative * Integer.parseInt(resultSb.toString());
+			}
+		} catch (NumberFormatException e) {
+			if (isNegative == -1) {
+				result = Integer.MIN_VALUE;
+			} else {
+				result = Integer.MAX_VALUE;
+			}
+		}
+		return result;
 	}
 
 	/**

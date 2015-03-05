@@ -53,6 +53,33 @@ public class LeetCode {
 		System.out.println(minStack.getMin());
 		System.out.println(leetCode.reverse(-123));
 		System.out.println(leetCode.atoi("   +0 123"));
+		System.out.println(leetCode.isPalindrome(-2147447412));
+	}
+
+	/**
+	 * Determine whether an integer is a palindrome. Do this without extra space.(回文)
+	 * @param x
+	 * @return
+	 */
+	public boolean isPalindrome(int x) {
+		if (x != Math.abs(x)) {
+			return false;
+		}
+		int a = x;
+		if (a > 0 && a < 10) {
+			return true;
+		}
+		int revertA = 0;
+		while (a / 10 != 0) {
+			revertA = ((revertA * 10) + (a % 10));
+			a = a / 10;
+		}
+		revertA = ((revertA * 10) + (a % 10));
+		if (revertA == Math.abs(x)) { // 翻转x之后，如果与x相等，则为回文
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -62,7 +89,7 @@ public class LeetCode {
 	 * @param str
 	 * @return
 	 */
-	public int atoi(String str) {// 选择尽可能多的连续的数字串进行转换
+	public int atoi(String str) {
 		str = str.trim();
 		int isNegative = 1;
 		boolean isAlreadyJudgeNegative = false;

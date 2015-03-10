@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 import cn.tsplaycool.help.ListNode;
 import cn.tsplaycool.help.MinStack;
 import cn.tsplaycool.help.TreeNode;
@@ -35,13 +37,11 @@ public class LeetCode {
 
 		nodes[1].left = nodes[3];
 		nodes[1].right = nodes[4];
-
-		nodes[2].left = nodes[2];
-		nodes[2].right = nodes[3];
+		nodes[2].left = nodes[5];
 
 		nodes[3].left = nodes[6];
 
-		System.out.println(leetCode.hasPathSum(nodes[0], 2));
+		System.out.println(leetCode.hasPathSum(nodes[0], 5));
 
 		int[] num = { 6, 5, 5 };
 		System.out.println(leetCode.majorityElement(num));
@@ -54,6 +54,34 @@ public class LeetCode {
 		System.out.println(leetCode.reverse(-123));
 		System.out.println(leetCode.atoi("   +0 123"));
 		System.out.println(leetCode.isPalindrome(-2147447412));
+		TreeNode[] a = new TreeNode[4];
+		a[0] = new TreeNode(0);
+		a[1] = new TreeNode(0);
+		a[2] = new TreeNode(0);
+		a[3] = new TreeNode(0);
+		a[0].left = a[1];
+		a[0].right = a[2];
+		a[1].right = a[3];
+		System.out.println(leetCode.maxDepth(nodes[0]));
+	}
+
+	/**
+	 * Given a binary tree, find its maximum depth.
+	 * The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+	 * @param root
+	 * @return
+	 */
+	public int maxDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int leftDepth = maxDepth(root.left);
+		int rightDepth = maxDepth(root.right);
+		if (leftDepth > rightDepth) {
+			return leftDepth + 1;
+		} else {
+			return rightDepth + 1;
+		}
 	}
 
 	/**

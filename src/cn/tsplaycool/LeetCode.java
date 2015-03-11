@@ -1,10 +1,10 @@
 package cn.tsplaycool;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import cn.tsplaycool.help.ListNode;
 import cn.tsplaycool.help.MinStack;
@@ -63,6 +63,44 @@ public class LeetCode {
 		a[0].right = a[2];
 		a[1].right = a[3];
 		System.out.println(leetCode.maxDepth(nodes[0]));
+		for (int i = 0; i < 31; i++) {
+			System.out.println(leetCode.getRow(i));
+		}
+	}
+
+	/**
+	 * Given an index k, return the kth row of the Pascal's triangle.(杨辉三角)
+	 * For example, given k = 3,
+	 * Return [1,3,3,1].
+	 * @param rowIndex
+	 * @return
+	 */
+	public List<Integer> getRow(int rowIndex) {// 若使用递归,OJ编译器会报TLE运行超时错误
+		List<Integer> result = new ArrayList<Integer>();
+		List<Integer> pre = new ArrayList<Integer>();
+
+		if (rowIndex < 0) {
+			return result;
+		}
+		for (int row = 0; row <= rowIndex; row++) {
+			if (row == 0) {
+				result.add(1);
+				continue;                                                                           
+			}
+			if (row == 1) {
+				result.add(1);
+				continue;
+			}
+			pre.clear();
+			pre.addAll(result);
+			for (int i = 1; i < row; i++) {
+				result.set(i, pre.get(i - 1) + pre.get(i));
+			}
+			result.add(1);
+
+		}
+		return result;
+
 	}
 
 	/**

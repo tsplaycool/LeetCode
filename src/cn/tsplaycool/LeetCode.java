@@ -66,6 +66,59 @@ public class LeetCode {
 		for (int i = 0; i < 31; i++) {
 			System.out.println(leetCode.getRow(i));
 		}
+		System.out.println(leetCode.generate(5));
+	}
+
+	/**
+	 * Given numRows, generate the first numRows of Pascal's triangle.
+	 * For example, given numRows = 5,
+	 * Return
+	[
+	[1],
+	[1,1],
+	[1,2,1],
+	[1,3,3,1],
+	[1,4,6,4,1]
+	]
+	 * @param numRows
+	 * @return
+	 */
+	public List<List<Integer>> generate(int numRows) {
+		List<Integer> tempRows = new ArrayList<Integer>();
+		List<Integer> preRows = new ArrayList<Integer>();
+		List<Integer> pascalRows = null;
+		List<List<Integer>> pascalRowsList = new ArrayList<List<Integer>>();
+		for (int row = 0; row < numRows; row++) {
+			if (row == 0) {
+				pascalRows = new ArrayList<Integer>();
+				pascalRows.add(1);
+				pascalRowsList.add(pascalRows);
+				continue;
+			}
+			if (row == 1) {
+				pascalRows = new ArrayList<Integer>();
+				pascalRows.add(1);
+				pascalRows.add(1);
+				tempRows.clear();
+				tempRows.addAll(pascalRows);
+				pascalRowsList.add(pascalRows);
+				continue;
+			}
+
+			pascalRows = new ArrayList<Integer>();
+			pascalRows.clear();
+			pascalRows.addAll(tempRows);
+			preRows.clear();
+			preRows.addAll(tempRows);
+			for (int i = 1; i < row; i++) {
+				pascalRows.set(i, preRows.get(i - 1) + preRows.get(i));
+			}
+			pascalRows.add(1);
+			tempRows.clear();
+			tempRows.addAll(pascalRows);
+			pascalRowsList.add(pascalRows);
+		}
+		return pascalRowsList;
 	}
 
 	/**
@@ -85,7 +138,7 @@ public class LeetCode {
 		for (int row = 0; row <= rowIndex; row++) {
 			if (row == 0) {
 				result.add(1);
-				continue;                                                                           
+				continue;
 			}
 			if (row == 1) {
 				result.add(1);

@@ -67,7 +67,27 @@ public class LeetCode {
 			System.out.println(leetCode.getRow(i));
 		}
 		System.out.println(leetCode.generate(5));
+		System.out.println(leetCode.hammingWeight(2147483647));
 	}
+
+	/**
+	 * Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+	 * For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
+	 * @param n
+	 * @return
+	 */
+	// you need to treat n as an unsigned value
+	public int hammingWeight(int n) {
+        int count = 0;
+        int i = 0;
+        do{
+            if((n & 1) == 1) count++;
+            n >>>= 1;
+            i++;
+        }while(i <= 32);
+        return count;
+        
+    }
 
 	/**
 	 * Given numRows, generate the first numRows of Pascal's triangle.
